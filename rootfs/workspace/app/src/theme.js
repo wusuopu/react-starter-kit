@@ -17,6 +17,6 @@ module.exports = exports = {
     '8px 8px 8px rgba(0, 0, 0, .15)'
   ],
   colors: {
-    primary: '#1890ff',
+    primary: '#ff0000',
   }
 }
