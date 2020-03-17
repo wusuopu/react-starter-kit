@@ -7,9 +7,12 @@ if [[ "$SKIP_REACT_BUILD" = "true" ]]; then
   exit 0
 fi
 
+# 不生成 sourMap 文件
+export GENERATE_SOURCEMAP=false
 yarn run build
 
 # 为此次build打tag
 date +"%Y%m%d-%T" > build/version.txt
 
-cp build/index.html build/index.html.tpl
+mainjsfile=`ls build/static/js/main.*.js`
+cp -v $mainjsfile build/static/js/main.js.tpl
