@@ -15,6 +15,8 @@ ARG SKIP_REACT_BUILD
 RUN sh build.sh
 
 #config
-EXPOSE 3000 9009
+EXPOSE 80 3000 9009
+
+ENV REACT_APP_CONFIG=""
 
 CMD ["sh", "run.sh"]
