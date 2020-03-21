@@ -11,5 +11,5 @@ let CONFIG: Config = {};
  }
 
 export default {
-  REACT_ROUTER_TYPE: CONFIG.REACT_ROUTER_TYPE || process.env.REACT_APP_ROUTER_TYPE || 'browser',
+  REACT_ROUTER_TYPE: CONFIG.REACT_ROUTER_TYPE || process.env.REACT_APP_ROUTER_TYPE || 'hash',
 }
