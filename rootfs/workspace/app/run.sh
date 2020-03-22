@@ -2,6 +2,7 @@
 
 current_dir=`realpath $(dirname .)`
 cd $current_dir
+sed_path=${current_dir}/sed.js
 
 mainjsfile=`ls build/static/js/main.*.js`
 cp -v build/static/js/main.js.tpl $mainjsfile
@@ -9,20 +10,10 @@ cp -v build/static/js/main.js.tpl $mainjsfile
 if [[ -z $REACT_APP_CONFIG ]]; then
   export REACT_APP_CONFIG='{}'
 fi
-if [[ `uname` = 'Darwin' ]]; then
-  # Mac 系统
-  sed -i'' -e 's@"__REACT-APP-CONFIG__"@'"$REACT_APP_CONFIG"'@' $mainjsfile
-else
-  sed -i 's@"__REACT-APP-CONFIG__"@'"$REACT_APP_CONFIG"'@' $mainjsfile $mainjsfile
-fi
+node $sed_path '"__REACT-APP-CONFIG__"' REACT_APP_CONFIG $mainjsfile
 
 cp -v build/index.html.tpl build/index.html
-if [[ `uname` = 'Darwin' ]]; then
-  # Mac 系统
-  sed -i'' -e 's@<noscript>EXTRA_HEAD_PLACEHOLDER</noscript>@'"$EXTRA_HEAD_PLACEHOLDER"'@' build/index.html
-else
-  sed -i 's@<noscript>EXTRA_HEAD_PLACEHOLDER</noscript>@'"$EXTRA_HEAD_PLACEHOLDER"'@' build/index.html build/index.html
-fi
+node $sed_path "<noscript>EXTRA_HEAD_PLACEHOLDER</noscript>" EXTRA_HEAD_PLACEHOLDER build/index.html
 
 
 cd ../../etc/nginx/conf.d
