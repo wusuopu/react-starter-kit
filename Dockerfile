@@ -11,6 +11,7 @@ COPY ./rootfs/ /
 WORKDIR /workspace/app
 
 ARG SKIP_REACT_BUILD
+ARG APP_HOMEPAGE
 
 RUN sh build.sh
 

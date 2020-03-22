@@ -7,6 +7,15 @@ if [[ "$SKIP_REACT_BUILD" = "true" ]]; then
   exit 0
 fi
 
+if [[ "$APP_HOMEPAGE" != "" ]]; then
+  if [[ `uname` = 'Darwin' ]]; then
+    # Mac 系统
+    sed -i'' -e 's@"homepage": "."@"homepage": "'$APP_HOMEPAGE'"@' package.json package.json
+  else
+    sed -i 's@"homepage": "."@"homepage": "'$APP_HOMEPAGE'"@' package.json package.json
+  fi
+fi
+
 # 不生成 sourMap 文件
 export GENERATE_SOURCEMAP=false
 yarn run build
